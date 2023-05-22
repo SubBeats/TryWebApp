@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Список животных</title>
+</head>
+<body>
+  <h1>Список животных</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th>Вид</th>
+        <th>Порода</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% animals.forEach(function(animal) { %>
+        <tr>
+          <td><%= animal.name %></td>
+          <td><%= animal.id %></td>
+          <td><%= animal.role %></td>
+          <td><%= animal.breed %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>

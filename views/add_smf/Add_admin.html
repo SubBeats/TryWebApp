@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Страница администратора</title>
+	<link rel="stylesheet" type="text/css" href="../admin_style.css">
+	<script type="text/javascript" src="/views/add_smf/add_admin.js"></script>
+
+</head>
+
+<body>
+	s
+
+	<nav class="navbar">
+		<ul>
+			<li><a href="/">Клиенты</a></li>
+			<li><a href="/add/new_doctor">Врачи </a></li>
+			<li><a href="/add/new_admin">Администраторы</a></li>
+			<li><a href="/admin">Добавить новые даты </a></li>
+		</ul>
+	</nav><br>
+
+	<h1>Добро пожаловать на страницу администратора!</h1>
+
+	<div class="content-wrapper">
+
+		<div class="table-wrapper">
+			<h2>Список пользователей:</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Имя</th>
+						<th>Фамилия</th>
+						<th>Email</th>
+						<th>Телефон</th>
+						<th>Роль</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i=0; i < results.length; i++) { %>
+						<tr>
+							<td>
+								<%= results[i].id %>
+							</td>
+							<td>
+								<%= results[i].first_name %>
+							</td>
+							<td>
+								<%= results[i].second_name %>
+							</td>
+							<td>
+								<%= results[i].email %>
+							</td>
+							<td>
+								<%= results[i].phone_number %>
+							</td>
+							<td>
+								<%= results[i].role %>
+							</td>
+						</tr>
+						<% } %>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form-wrapper">
+			<br>
+			<a href="Logout.html" class="logout-button">Выход</a>
+			<br>
+
+			<h2>Добавление нового администратора:</h2>
+			<form action="add_admin" method="POST" id="add-admin-form">
+				<label for="admin-name">Имя:</label>
+				<input type="text" id="admin-name" name="name"><br>
+
+				<label for="admin-secondname">Фамилия:</label>
+				<input type="text" id="admin-secondname" name="secondname"><br>
+
+				<label for="admin-phone">Телефон:</label>
+				<input type="tel" id="admin-phone" name="phone"><br>
+
+				<label for="admin-email">Email:</label>
+				<input type="email" id="admin-email" name="email"><br>
+
+				<label for="admin-password">Пароль:</label>
+				<input type="password" id="admin-password" name="password"><br>
+
+				<input type="submit" value="Добавить администратора">
+			</form>
+
+			<h2>Удаление пользователя:</h2>
+			<form action="delete_client" method="POST" id="delete-client-form">
+				<label for="client-id">ID клиента:</label>
+				<input type="text" id="client-id" name="id"><br>
+
+				<input type="submit" value="Удалить клиента">
+			</form>
+			<script>
+
+				const addAdmin = async () => {
+					const name = document.querySelector('#admin-name').value;
+					const second_name = document.querySelector('#admin-secondname').value;
+					const email = document.querySelector('#admin-email').value;
+					const password = document.querySelector('#admin-password').value;
+					const phone_number = document.querySelector('#admin-phone').value;
+					const role = 'admin';
+
+					console.log("admin add :" + name);
+
+					const response = await fetch('http://localhost:8080/add/add_admin', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ name, second_name, email, password, phone_number, role }),
+					});
+
+					if (response.ok) {
+						console.log('Клиент успешно добавлен');
+						window.location.assign('http://localhost:8080/add/new_admin');// автоматически обновляем страницу
+					} else {
+						console.error('Ошибка при добавлении админа');
+					}
+				};
+
+				// Функция для удаления клиента
+				const deleteClient = async () => {
+					const id = document.querySelector('#client-id').value;
+					console.log("Id выбранного клиента которого необходимо удалить: " + id)
+
+					const response = await fetch('http://localhost:8080/delete_client', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ id }),
+					});
+
+					if (response.ok) {
+						console.log('Клиент успешно удален');
+						location.reload(); // автоматически обновляем страницу
+					} else {
+						console.error('Ошибка при удалении клиента');
+					}
+				};
+
+				document.addEventListener('DOMContentLoaded', () => {//Это гарантирует, что скрипт будет запущен только после того, как загрузится HTML-документ.  
+					const deleteClientForm = document.querySelector('#delete-client-form');
+					deleteClientForm.addEventListener('submit', async (event) => {
+						event.preventDefault();
+						await deleteClient();
+					});
+					const addAdminForm = document.querySelector('#add-admin-form');
+					addAdminForm.addEventListener('submit', async (event) => {
+						event.preventDefault();
+						await addAdmin();
+					});
+
+				});
+
+			</script>
+
+		</div>
+
+	</div>
+</body>
+
+</html>

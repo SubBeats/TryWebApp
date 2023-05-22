@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Пример связанных выпадающих списков</title>
+  <link rel="stylesheet" type="text/css" href="make.css">
+</head>
+
+<body>
+  <label for="select0">Выберите тип приема:</label><br>
+  <select id="select0">
+    <option value=""></option>
+    <% data.services.forEach(function(service) {%>
+      <option value="<%= service.id%>">
+        <%= service.name %>
+      </option>
+      <% }); %>
+  </select>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    // Получаем значение для select0 из URL, если оно есть
+    const select0ValueFromURL = params.get('select0');
+    const select0 = document.querySelector('#select0');
+    // select0.querySelector(`option[value="${select0ValueFromURL}"]`).setAttribute('selected', true);
+    select0.value = select0ValueFromURL;
+  </script><br><br>
+
+  <label for="select1">Выберите лечащего врача:</label><br>
+  <select id="select1">
+    <option value=""></option>
+    <% data.doctors.forEach(function(doctor) {%>
+      <option value="<%= doctor.id%>">
+        <%= doctor.name %>
+      </option>
+      <% }); %>
+  </select><br><br>
+
+  <label for="select2">Выберите дату:</label><br>
+  <select id="select2">
+    <option value=""></option>
+  </select><br><br>
+
+  <label for="select3">Выберите время:</label><br>
+  <select id="select3">
+    <option value=""></option>
+  </select><br>
+  <br>
+  <form action="make_opp" method="POST" id="make_opp">
+    <input type="submit" value="Создать запись">
+  </form>
+
+  <script src="make.js"></script>
+
+</body>
+
+</html>

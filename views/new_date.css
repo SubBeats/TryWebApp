@@ -1,0 +1,80 @@
+/* Стили для формы */
+form {
+    margin: 0 auto;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+}
+
+/* Стили для заголовка "Select date" */
+#calendar h2 {
+    text-align: center;
+    font-size: 36px; /* Увеличим размер шрифта */
+    color: #000000; /* Изменение цвета текста на голубой */
+    margin-top: 70px; /* увеличим отступ сверху */
+    margin-bottom: 30px; /* увеличим отступ снизу */
+}
+
+/* Стили для блоков месяца и дней */
+#calendar div {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 50%;
+    min-height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Стили для списка select */
+select {
+    display: block;
+    margin: 0 auto 40px; /* увеличим отступ снизу */
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+/* Стили для полей ввода времени и даты */
+input[type="date"],
+input[type="time"] {
+    display: block;
+    margin: 0 auto 40px; /* увеличим отступ снизу */
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопки добавления */
+button {
+    font-family: Arial, sans-serif;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none; /* убираем обводку кнопки при получении фокуса */
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: transparent; /* делаем фон кнопки прозрачным */
+    border: 2px solid #007bff; /* добавляем синий контур */
+    color: #007bff; /* меняем цвет текста на синий */
+}
+
+label {
+    font-family: Arial, sans-serif; /* Изменение шрифта */
+    color: #333; /* Изменение цвета текста */
+}

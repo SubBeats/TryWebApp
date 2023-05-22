@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+
+<head>
+    <!-- <script type="text/javascript" src="new_date.js"></script> -->
+    <link rel="stylesheet" href="new_date.css">
+
+</head>
+
+<body>
+
+    
+    <div id="calendar">
+        <h2>Select date:</h2>
+    </div>
+    <br><br>
+
+    <form id="add-form">
+        <label for="time">Лечащий врач</label><br>
+
+        <select id="doctor_id">
+            <% results.forEach(function(doc) {%>
+                <option value="<%= doc.id%>">
+                    <%= doc.name %>
+                </option>
+                <% }); %>
+        </select>
+
+        <label for="time">Дата</label><br>
+        <input type="time" id="time" name="time">
+        <label for="date">Время</label><br>
+        <input type="date" id="date" name="date">
+
+
+        <button type="submit">Добавить</button>
+    </form>
+    <script>
+        const form = document.getElementById("add-form");
+        const date = document.getElementById("date");
+        const time = document.getElementById("time");
+        const doc_id = document.getElementById("doctor_id");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const dateValue = date.value;
+            const timeValue = time.value;
+            const id = doc_id.value;
+
+            console.log(id);
+            console.log(timeValue);
+            console.log(dateValue);
+
+            fetch('http://localhost:8080/add_new_note', { // отправляем AJAX-запрос на сервер
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ dateValue, timeValue, id })
+            })
+                .then(response => { // обрабатываем ответ от сервера
+                    const result = response.json().then(result => {
+                        if (result.success) { // если запрос успешный
+                            alert("Запись добавлена!"); // выводим сообщение об успешной регистрации
+                            document.getElementById('date').value = '';
+                            document.getElementById('time').value = '';
+                        } else {
+                            alert(result.message); // выводим сообщение об ошибке регистрации
+                        }
+                    })
+
+                })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Страница администратора</title>
+	<link rel="stylesheet" type="text/css" href="../admin_style.css">
+	<script type="text/javascript" src="add_admin.js"></script>
+
+</head>
+<body>
+
+		
+	<nav class="navbar">
+		<ul>
+		  <li><a href="/">Клиенты</a></li>
+		  <li><a href="/add/new_doctor">Врачи </a></li>
+		  <li><a href="/add/new_admin">Администраторы</a></li>
+		  <li><a href="/admin">Добавить новые даты </a></li>
+		</ul>
+	</nav><br>
+
+	<h1>Добро пожаловать на страницу администратора!</h1>
+
+	<div class="content-wrapper">
+
+		<div class="table-wrapper">
+			<h2>Список пользователей:</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>ФИО</th>
+                        <th>Занимаемый пост</th>
+						<th>Стаж</th>
+                        <th>номер</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i = 0; i < results.length; i++) { %>
+					<tr>
+						<td><%= results[i].id %></td>
+						<td><%= results[i].name %></td>
+                        <td><%= results[i].post %></td>
+						<td><%= results[i].year %></td>
+						<td><%= results[i].phone_number %></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form-wrapper">
+            <br>
+            <a href="Logout.html" class="logout-button">Выход</a>
+            <br>
+
+
+			<h2>Добавление нового врача:</h2>
+			<form action="add_doctor" method="POST" >
+				<label for="doctor-name">Имя:</label>
+				<input type="text" id="doctor-name" name="name"><br>
+
+				<label for="doctor-email">Email:</label>
+				<input type="email" id="doctor-email" name="email"><br>
+
+				<label for="doctor-phone">Телефон:</label>
+				<input type="tel" id="doctor-phone" name="phone"><br>
+
+                <label for="year">Телефон:</label>
+				<input type="number" id="year" name="year"><br>
+
+				<input type="submit" value="Добавить врача">
+			</form>
+			
+			<h2>Удаление пользователя:</h2>
+			<form action="delete_client" method="POST" id="delete-client-form">
+				<label for="client-id">ID клиента:</label>
+				<input type="text" id="client-id" name="id"><br>
+				
+				<input type="submit" value="Удалить клиента">
+			</form>
+
+        </div>
+    
+    </div>
+</body>
+</html>

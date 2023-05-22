@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Страница администратора</title>
+	<link rel="stylesheet" type="text/css" href="admin_style.css">
+	<script type="text/javascript" src="Admin.js"></script>
+
+</head>
+<body>
+
+		
+	<nav class="navbar">
+		<ul>
+		  <li><a href="/">Клиенты</a></li>
+		  <li><a href="/add/new_doctor">Врачи </a></li>
+		  <li><a href="/add/new_admin">Администраторы</a></li>
+		  <li><a href="/admin">Добавить новые даты </a></li>
+		</ul>
+	</nav><br>
+
+	<h1>Добро пожаловать на страницу администратора!</h1>
+
+	<div class="content-wrapper">
+
+		<div class="table-wrapper">
+			<h2>Список пользователей:</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Имя</th>
+                        <th>Фамилия</th>
+						<th>Email</th>
+						<th>Телефон</th>
+						<th>Роль</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i = 0; i < results.length; i++) { %>
+					<tr>
+						<td><%= results[i].id %></td>
+						<td><%= results[i].first_name %></td>
+                        <td><%= results[i].second_name %></td>
+						<td><%= results[i].email %></td>
+						<td><%= results[i].phone_number %></td>
+						<td><%= results[i].role %></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form-wrapper">
+            <br>
+            <a href="Logout.html" class="logout-button">Выход</a>
+            <br>
+			<h2>Добавление нового клиента:</h2>
+			<form action="add_client" method="POST" id="add-client-form">
+				<label for="client-name">Имя:</label>
+				<input type="text" id="client-name" name="name"><br>
+
+                <label for="client-phone">Фамилия:</label>
+				<input type="tel" id="client-secondname" name="secondname"><br>
+
+                <label for="client-phone">Телефон:</label>
+				<input type="tel" id="client-phone" name="phone"><br>
+
+				<label for="client-email">Email:</label>
+				<input type="email" id="client-email" name="email"><br>
+
+				<label for="client-phone">Пароль:</label>
+				<input type="tel" id="client-password" name="password"><br>
+
+				<input type="submit" value="Добавить клиента">
+			</form>
+
+			
+			<h2>Удаление пользователя:</h2>
+			<form action="delete_client" method="POST" id="delete-client-form">
+				<label for="client-id">ID клиента:</label>
+				<input type="text" id="client-id" name="id"><br>
+				
+				<input type="submit" value="Удалить клиента">
+			</form>
+
+        </div>
+    
+    </div>
+</body>
+</html>

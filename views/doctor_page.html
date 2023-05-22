@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Расписание работы врачей</title>
+	<script src="doctor_page.js"></script>
+
+	<style>
+		h1 {
+			font-family: "Book Antiqua", sans-serif;
+			/* Изменяем шрифт */
+			text-align: center;
+			/* Выравниваем по центру */
+			font-size: 3em;
+			/* Устанавливаем размер шрифта */
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			text-align: center;
+			padding: 8px;
+			border: 1px solid rgb(0, 0, 0);
+		}
+
+		/* header таблицы */
+		th {
+			background-color: rgb(53, 106, 150);
+		}
+
+		.modal {
+			display: none;
+			/* Модальное окно изначально скрыто */
+			position: fixed;
+			/* Фиксированная позиция */
+			z-index: 1;
+			/* Находится на самом верху */
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			/* Включаем прокручивание */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Цвет фона с непрозрачностью */
+		}
+
+		/* Стили для контента внутри модального окна */
+		.modal-content {
+			background-color: #fefefe;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #5ea0f7;
+			width: 80%;
+		}
+
+		/* Стили для элемента для закрытия модального окна */
+		.close {
+			color: #cf3737;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		/* Стили для элемента для закрытия модального окна при наведении */
+		.close:hover,
+		.close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Расписание работы врачей</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>День недели</th>
+				<th>Дата</th>
+				<th>Время приема</th>
+				<th>Завершить</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for (let i=0; i < results.length; i++) { %>
+				<tr>
+					<td>
+						<%= new Date(results[i].date).toLocaleDateString('ru-RU', { weekday: 'long' }) %>
+					</td>
+					<td>
+						<%= new Date(results[i].date).toLocaleDateString('ru-RU'); %>
+					</td>
+					<td>
+						<%= results[i].time %>
+					</td>
+					<td>
+						<button onclick="openModal(event)"
+							value='<%= JSON.stringify({ id: results[i].id,client_id: results[i].client_id,service_id: results[i].service_id }) %>'>Закрыть
+							запись</button>
+					</td>
+				</tr>
+				<% } %>
+		</tbody>
+	</table>
+	<!-- Модальное окно -->
+	<div id="myModal" class="modal">
+
+		<!-- Контент модального окна -->
+		<div class="modal-content" id="modal_content">
+			<span class="close">&times;</span>
+			<button class="ok">Закрыть запись</button>
+		</div>
+
+	</div>
+</body>
+
+</html>

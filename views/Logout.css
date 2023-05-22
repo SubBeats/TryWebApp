@@ -1,0 +1,38 @@
+body {
+    position: fixed; top: 10%; left: 35%;
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    padding: 20px;
+    }
+    
+    h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    }
+    
+    p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    }
+    
+    form {
+    display: inline-block;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    button {
+    background-color: #808fa0;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    }
+    
+    button:hover {
+    background-color: #d32f2f;
+    }
